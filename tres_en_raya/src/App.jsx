@@ -11,7 +11,7 @@ function Square({ value, onSquareClick }) {
 
 export default function Board() {
 
-    // Declarar una VARIABLE DE ESTADO
+  // Declarar una VARIABLE DE ESTADO
   // useState crea una variable de estado y su respectivo set. El valor por defecto o inicial de la variable es el argumento que hayamos pasado al useState
   // Las variables de estado están formadas por un par variable - funcionSet
 
@@ -33,9 +33,9 @@ export default function Board() {
 
     for (const line of lines) {
       const [a, b, c] = line;
-      if (squares[a] 
-          && squares[a] === squares[b] 
-          && squares[a] === squares[c]) {
+      if (squares[a]
+        && squares[a] === squares[b]
+        && squares[a] === squares[c]) {
         winner = squares[a];
       }
     }
@@ -43,51 +43,54 @@ export default function Board() {
   }
 
   function mensajeEstado() {
-  const ganador = calculateWinner(squares)
-  let mensaje = ""
+    const ganador = calculateWinner(squares)
+    let mensaje = ""
 
-  if (ganador) {
-    mensaje = "Ganador: " + ganador + " 🎉🎉🎉"
-  } else if (!squares.includes(null)) {
-    mensaje = "Empate"
-  } else {
-    mensaje = turnoX ? "Turno jugador X" : "Turno jugador O"
+    if (ganador) {
+      mensaje = "Ganador: " + ganador + " 🎉🎉🎉"
+    } else if (!squares.includes(null)) {
+      mensaje = "Empate"
+    } else {
+      mensaje = turnoX ? "Turno jugador X" : "Turno jugador O"
+    }
+
+    return mensaje
   }
 
-  return mensaje
-}
-
   function handleClick(position) {
-    const squaresCopy = squares.slice()
+    const squaresCopy = squares.slice() // .slice() copia el array en squaresCopy
+
     if (squaresCopy[position] == null && !calculateWinner(squaresCopy)) {
       squaresCopy[position] = turnoX ? "X" : "O"
       setTurnoX(!turnoX)
-      setSquares(squaresCopy)
     }
+
+    setSquares(squaresCopy) // Hago set del array completo para que se renderice
+    console.log("Ha ganado " + calculateWinner(squaresCopy) )
   }
 
-  return (
-    <>
-      <div className="board-row">
-        <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
-        <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
-        <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
-      </div>
-      <div className="board-row">
-        <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
-        <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
-        <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
-      </div>
-      <div className="board-row">
-        <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
-        <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
-        <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
-      </div>
-      <div className="board-row">
-        <h1>{mensajeEstado()}</h1>
-      </div>
-    </>
-  );
+return (
+  <>
+    <div className="board-row">
+      <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
+      <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
+      <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
+    </div>
+    <div className="board-row">
+      <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
+      <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
+      <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
+    </div>
+    <div className="board-row">
+      <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
+      <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
+      <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
+    </div>
+    <div className="board-row">
+      <h1>{mensajeEstado()}</h1>
+    </div>
+  </>
+);
 }
 
 
