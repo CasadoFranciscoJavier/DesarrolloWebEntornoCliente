@@ -1,52 +1,105 @@
-import { useState } from "react";
 
-function Square({ value }) {
+import { useState } from 'react';
 
-  //declarar una variable de estado
-  //useState crea una variable de estado y su respectivo set. el valor por defecto o inicial de la variable es el argumento que hayamos pasado al useState
-  //las variables de estado están formadas por un par variable- funcionSet
-  // const [value, setValue] = useState(null);
-
-  // function handleClick() {
-  //   setValue("X")
-  // }
-  // quitammos todo esto porque ya no hace falta al crear el array en nuestro board
+function Square({ value, onSquareClick }) {
   return (
-    <button className="square">
+    <button className="square" onClick={onSquareClick}>
       {value}
     </button>
   );
 }
 
 export default function Board() {
-  const [squares, setSquares] = useState(Array(9).fill(null));
 
-    function handleClick() {
-    const nextSquares = squares.slice();
-    nextSquares[0] = "X";
-    setSquares(nextSquares);
+    // Declarar una VARIABLE DE ESTADO
+  // useState crea una variable de estado y su respectivo set. El valor por defecto o inicial de la variable es el argumento que hayamos pasado al useState
+  // Las variables de estado están formadas por un par variable - funcionSet
+
+  const [squares, setSquares] = useState(Array(9).fill(null))
+  const [turnoX, setTurnoX] = useState(true)
+
+  function calculateWinner(squares) {
+    let winner = null
+    const lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6]
+    ];
+
+    for (const line of lines) {
+      const [a, b, c] = line;
+      if (squares[a] 
+          && squares[a] === squares[b] 
+          && squares[a] === squares[c]) {
+        winner = squares[a];
+      }
+    }
+    return winner;
   }
-  
+
+  function mensajeEstado() {
+  const ganador = calculateWinner(squares)
+  let mensaje = ""
+
+  if (ganador) {
+    mensaje = "Ganador: " + ganador + " 🎉🎉🎉"
+  } else if (!squares.includes(null)) {
+    mensaje = "Empate"
+  } else {
+    mensaje = turnoX ? "Turno jugador X" : "Turno jugador O"
+  }
+
+  return mensaje
+}
+
+  function handleClick(position) {
+    const squaresCopy = squares.slice()
+    if (squaresCopy[position] == null && !calculateWinner(squaresCopy)) {
+      squaresCopy[position] = turnoX ? "X" : "O"
+      setTurnoX(!turnoX)
+      setSquares(squaresCopy)
+    }
+  }
+
   return (
     <>
       <div className="board-row">
-        <Square value={squares[0]} />
-        <Square value={squares[1]} />
-        <Square value={squares[2]} />
+        <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
+        <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
+        <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
       </div>
       <div className="board-row">
-        <Square value={squares[3]} />
-        <Square value={squares[4]} />
-        <Square value={squares[5]} />
+        <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
+        <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
+        <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
       </div>
       <div className="board-row">
-        <Square value={squares[6]} />
-        <Square value={squares[7]} />
-        <Square value={squares[8]} />
+        <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
+        <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
+        <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
+      </div>
+      <div className="board-row">
+        <h1>{mensajeEstado()}</h1>
       </div>
     </>
   );
 }
+
+
+//declarar una variable de estado
+//useState crea una variable de estado y su respectivo set. el valor por defecto o inicial de la variable es el argumento que hayamos pasado al useState
+//las variables de estado están formadas por un par variable- funcionSet
+// const [value, setValue] = useState(null);
+
+// function handleClick() {
+//   setValue("X")
+// }
+// quitammos todo esto porque ya no hace falta al crear el array en nuestro board
 // el export default es como decir main, es la funcion principal es el que se va a compilar
 // la palabra export hace que sea accesible desde otros archivos
 // La primera línea define una función llamada Square. 
