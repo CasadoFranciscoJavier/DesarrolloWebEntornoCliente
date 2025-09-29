@@ -90,3 +90,35 @@ body {
 .game-info {
   margin-left: 20px;
 }
+
+button {
+  margin-top: 20px;
+  background-color:#168b94;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+
+}
+
+ol {
+  padding-left: 30px;
+  color: white;
+  text-align: left;
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style: decimal;
+ 
+  overflow-y: auto;
+}
+
+h3{
+    padding-left: 30px;
+  color: white;
+  text-align: left;
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style: decimal;
+  max-height: 200px;
+  overflow-y: auto;
+}

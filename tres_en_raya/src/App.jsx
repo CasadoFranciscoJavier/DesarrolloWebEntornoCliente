@@ -15,8 +15,9 @@ export default function Board() {
   // useState crea una variable de estado y su respectivo set. El valor por defecto o inicial de la variable es el argumento que hayamos pasado al useState
   // Las variables de estado están formadas por un par variable - funcionSet
 
-  const [squares, setSquares] = useState(Array(9).fill(null))
-  const [turnoX, setTurnoX] = useState(true)
+  const [squares, setSquares] = useState(Array(9).fill(null));
+  const [turnoX, setTurnoX] = useState(true);
+  const [history, setHistory] = useState([Array(9).fill(null)]);
 
   function calculateWinner(squares) {
     let winner = null
@@ -58,16 +59,64 @@ export default function Board() {
   }
 
   function handleClick(position) {
-    const squaresCopy = squares.slice() // .slice() copia el array en squaresCopy
-
+    const squaresCopy = squares.slice();
     if (squaresCopy[position] == null && !calculateWinner(squaresCopy)) {
-      squaresCopy[position] = turnoX ? "X" : "O"
-      setTurnoX(!turnoX)
+      squaresCopy[position] = turnoX ? "X" : "O";
+      setTurnoX(!turnoX);
+      setSquares(squaresCopy);
+      history.push(squaresCopy);
     }
-
-    setSquares(squaresCopy) // Hago set del array completo para que se renderice
-    console.log("Ha ganado " + calculateWinner(squaresCopy) )
   }
+
+  function retroceder() {
+    history.pop();
+    const ultimaJugada = history[history.length - 1];
+    if (ultimaJugada) {
+      setSquares(ultimaJugada);
+      setTurnoX(!turnoX);
+    }
+  }
+
+ function historialJugadas() {
+  const items = [];
+
+  for (let index = 0; index < history.length; index++) {
+    const squares = history[index];
+    const historico = index == 0 ? "Inicio" : "Jugada #" + index;
+
+    items.push(
+      <li key={index}>
+        <button onClick={() => {
+          setSquares(squares);
+          setTurnoX(!turnoX);
+          setHistory(history.slice(0, index + 1));
+        }}>
+          {historico}
+        </button>
+      </li>
+    );
+  }
+
+  return <ol>{items}</ol>;
+}
+
+
+
+    //    (
+    //     <li key={index}>
+    //       <button onClick={() => {
+    //         setSquares(squares);
+    //         setTurnoX(!(turnoX));
+    //         setHistory(history.push);
+    //       }}>
+    //         {historico}
+    //       </button>
+    //     </li>
+    //   );
+    // } );}
+
+
+
 
 return (
   <>
@@ -86,6 +135,13 @@ return (
       <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
       <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
     </div>
+    <h3>Historial de Jugadas</h3>
+    <ol>{historialJugadas()}</ol> 
+   <div>
+   {(history.length > 1) &&<button onClick={retroceder}>Retroceder</button>}
+   </div>
+ 
+
     <div className="board-row">
       <h1>{mensajeEstado()}</h1>
     </div>
@@ -94,6 +150,7 @@ return (
 }
 
 
+// tengo que meter un boton de retroceder a un turno anterior, estoy añadiendo esta variable const nueva, la de history...
 //declarar una variable de estado
 //useState crea una variable de estado y su respectivo set. el valor por defecto o inicial de la variable es el argumento que hayamos pasado al useState
 //las variables de estado están formadas por un par variable- funcionSet
