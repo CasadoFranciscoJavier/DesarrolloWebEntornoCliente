@@ -77,80 +77,85 @@ export default function Board() {
     }
   }
 
- function historialJugadas() {
-  const items = [];
+  function historialJugadas() {
+    const items = [];
 
-  for (let index = 0; index < history.length; index++) {
-    const squares = history[index];
-    const historico = index == 0 ? "Inicio" : "Jugada #" + index;
+    for (let index = 0; index < history.length; index++) {
+      const squares = history[index];
+      const historico = index == 0 ? "Inicio" : "Jugada #" + index;
 
-    items.push(
-      <li key={index}>
-        <button onClick={() => {
-          setSquares(squares);
-          setTurnoX(!turnoX);
-          setHistory(history.slice(0, index + 1));
-        }}>
-          {historico}
-        </button>
-      </li>
-    );
+      items.push(
+        <li key={index}>
+          <button onClick={() => {
+            setSquares(squares);
+            setTurnoX(!turnoX);
+            setHistory(history.slice(0, index + 1));
+          }}>
+            {historico}
+          </button>
+        </li>
+      );
+    }
+
+    return <ol>{items}</ol>;
   }
 
-  return <ol>{items}</ol>;
+
+
+// setTurnoX(!index % 2));
+
+  //    (
+  //     <li key={index}>
+  //       <button onClick={() => {
+  //         setSquares(squares);
+  //         setTurnoX(!(turnoX));
+  //         setHistory(history.push);
+  //       }}>
+  //         {historico}
+  //       </button>
+  //     </li>
+  //   );
+  // } );}
+
+
+
+
+  return (
+    <>
+      <div className="board-row">
+        <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
+        <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
+        <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
+      </div>
+      <div className="board-row">
+        <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
+        <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
+        <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
+      </div>
+      <div className="board-row">
+        <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
+        <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
+        <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
+      </div>
+      
+  
+
+      <h3>Historial de Jugadas</h3>
+      <ol>{historialJugadas()}</ol>
+      <div>
+        {(history.length > 1) && <button onClick={retroceder}>Retroceder</button>}
+      </div>
+
+
+      <div className="board-row">
+        <h1>{mensajeEstado()}</h1>
+      </div>
+    </>
+  );
 }
 
 
 
-    //    (
-    //     <li key={index}>
-    //       <button onClick={() => {
-    //         setSquares(squares);
-    //         setTurnoX(!(turnoX));
-    //         setHistory(history.push);
-    //       }}>
-    //         {historico}
-    //       </button>
-    //     </li>
-    //   );
-    // } );}
-
-
-
-
-return (
-  <>
-    <div className="board-row">
-      <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
-      <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
-      <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
-    </div>
-    <div className="board-row">
-      <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
-      <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
-      <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
-    </div>
-    <div className="board-row">
-      <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
-      <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
-      <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
-    </div>
-    <h3>Historial de Jugadas</h3>
-    <ol>{historialJugadas()}</ol> 
-   <div>
-   {(history.length > 1) &&<button onClick={retroceder}>Retroceder</button>}
-   </div>
- 
-
-    <div className="board-row">
-      <h1>{mensajeEstado()}</h1>
-    </div>
-  </>
-);
-}
-
-
-// tengo que meter un boton de retroceder a un turno anterior, estoy añadiendo esta variable const nueva, la de history...
 //declarar una variable de estado
 //useState crea una variable de estado y su respectivo set. el valor por defecto o inicial de la variable es el argumento que hayamos pasado al useState
 //las variables de estado están formadas por un par variable- funcionSet
