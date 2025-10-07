@@ -1,142 +1,100 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react";
 
 const ICONO_BALA = "💀";
 const ICONO_CLIC = "🎯";
 const NUM_CAMARAS = 6;
 
 function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1) + min);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function Seleccion({ seleccion }) {
+function CantidadDeJugadores({ totalJugadores, setTotalJugadores }) {
   return (
-    <h1 style={{ fontSize: '48px', margin: '10px' }}>
-      {seleccion}
-    </h1>
-  )
+    <div>
+      <p>¿Cuántos jugadores van a participar (2-6)?</p>
+      <select
+        value={totalJugadores}
+        onChange={(e) => setTotalJugadores(parseInt(e.target.value))}
+      >
+        {[2, 3, 4, 5, 6].map((numeroJugadores) => (
+          <option key={numeroJugadores} value={numeroJugadores}>{numeroJugadores}</option>
+        ))}
+      </select>
+    </div>
+  );
 }
 
-function Juego() {
-  
-  const [tambor, setTambor] = useState(Array(NUM_CAMARAS).fill(0));
-  const [posicionActual, setPosicionActual] = useState(0); 
-  const [resultadoTurno, setResultadoTurno] = useState("");
-  const [ganador, setGanador] = useState(null);
-  const [turno, setTurno] = useState("JUGADOR");
+export default function Juego() {
+  const [totalJugadores, setTotalJugadores] = useState(2);
+  const [posicionActual, setPosicionActual] = useState(0);
+  const [bala, setBala] = useState(0);
+  const [turno, setTurno] = useState(1);
+  const [resultado, setResultado] = useState("");
+  const [fin, setFin] = useState(false);
 
   useEffect(() => {
-    if (tambor.every(camara => camara == 0)) {
-        cargarPistolaInicial();
-    }
-  }, []);
-
-  function cargarPistolaInicial() {
-    const nuevoTambor = Array(NUM_CAMARAS).fill(0);
-    const indiceBala = getRandomInt(0, NUM_CAMARAS - 1);
-    
-    nuevoTambor[indiceBala] = 1;
-    
-    const inicioTambor = getRandomInt(0, NUM_CAMARAS - 1);
-
-    setTambor(nuevoTambor);
-    setPosicionActual(inicioTambor);
-    setResultadoTurno(`¡Cargada! Empieza el ${turno}`);
-    setGanador(null);
-  }
+    setBala(getRandomInt(0, NUM_CAMARAS - 1));
+    setPosicionActual(getRandomInt(0, NUM_CAMARAS - 1));
+  }, [turno]);
 
   function disparar() {
-    if (ganador == null) {
-        
-        const camaraActual = tambor[posicionActual];
-        let huboImpacto = false;
+    if (fin) return;
 
-        if (camaraActual == 1) {
-            huboImpacto = true;
-        }
-
-        if (huboImpacto) {
-            setResultadoTurno("BOOM: " + ICONO_BALA);
-            
-            if (turno == "JUGADOR") {
-                setGanador("Gana la MAQUINA (Jugador Eliminado)");
-            } else {
-                setGanador("Gana el JUGADOR (Máquina Eliminada)");
-            }
-
-        } else {
-            setResultadoTurno("CLIC: " + ICONO_CLIC);
-            
-            const siguientePosicion = (posicionActual + 1) % NUM_CAMARAS;
-            setPosicionActual(siguientePosicion);
-
-            const siguienteTurno = turno == "JUGADOR" ? "MAQUINA" : "JUGADOR";
-            setTurno(siguienteTurno);
-        }
+    if (posicionActual == bala) {
+      setResultado(`💥 Jugador ${turno} pierde ${ICONO_BALA}`);
+      if (totalJugadores > 2) {
+        const siguiente = turno + 1 > totalJugadores ? 1 : turno + 1;
+        setTotalJugadores(totalJugadores - 1);
+        setTurno(siguiente);
+      } else {
+         setFin(true);
+      }
+     
+    } else {
+      setResultado(`Click ${ICONO_CLIC}`);
+      const siguiente = turno + 1 > totalJugadores ? 1 : turno + 1;
+      setTurno(siguiente);
     }
   }
-  
-  function resetearJuego() {
-    setTambor(Array(NUM_CAMARAS).fill(0));
-    setPosicionActual(0);
-    setResultadoTurno("");
-    setGanador(null);
-    setTurno("JUGADOR");
-    cargarPistolaInicial();
+
+  function reiniciar() {
+    setFin(false);
+    setResultado("");
+    setTurno(1);
+    setBala(getRandomInt(0, NUM_CAMARAS - 1));
+    setPosicionActual(getRandomInt(0, NUM_CAMARAS - 1));
+  }
+
+ function renderTambor() {
+    const camaras = [];
+    for (let i = 0; i < NUM_CAMARAS; i++) {
+      let icono = "⚪";
+      if (i == posicionActual && !fin) icono = "🎯";
+      if (fin && i == bala) icono = ICONO_BALA;
+      camaras.push(<span key={i} style={{ fontSize: "30px", margin: "4px" }}>{icono}</span>);
+    }
+    return camaras;
   }
 
   return (
-    <div style={{ padding: '20px', textAlign: 'center', maxWidth: '400px', margin: '0 auto', border: '1px solid #ccc', borderRadius: '10px' }}>
+    <div style={{ textAlign: "center", padding: "20px" }}>
+      <h1>Ruleta Rusa</h1>
 
-      <h1 style={{ color: '#4f46e5' }}>Ruleta Rusa</h1>
-      
-      <div style={{ marginBottom: '20px', border: '1px solid #eee', padding: '10px', borderRadius: '5px' }}>
-        <h2 style={{ fontSize: '20px', color: '#333' }}>
-          {ganador ? "¡" + ganador + "!" : `Turno: ${turno}`}
-        </h2>
-        <Seleccion seleccion={resultadoTurno} />
-      </div>
+      <CantidadDeJugadores
+        totalJugadores={totalJugadores}
+        setTotalJugadores={setTotalJugadores}
+      />
 
-      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
-        {tambor.map((_, index) => {
-            const isCurrent = index == posicionActual;
-            let emoji = isCurrent ? '🔘' : '⚪';
-            
-            if (ganador != null && tambor[index] == 1) {
-                emoji = ICONO_BALA;
-            }
+      <h2>{fin ? resultado : `Turno del jugador ${turno}`}</h2>
+      {!fin && <p>{resultado}</p>}
 
-            return (
-                <span key={index} style={{ fontSize: '30px', margin: '5px' }}>
-                    {emoji}
-                </span>
-            );
-        })}
-      </div>
+      <div style={{ margin: "10px" }}>{renderTambor()}</div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-          
-          {ganador == null && (
-              <button 
-                  onClick={disparar}
-                  style={{ padding: '10px', fontSize: '18px', backgroundColor: '#ef4444', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}
-              >
-                  ¡Disparar! 💥
-              </button>
-          )}
-
-          {ganador != null && (
-              <button 
-                  onClick={resetearJuego}
-                  style={{ padding: '10px', fontSize: '18px', backgroundColor: '#10b981', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}
-              >
-                  Volver a Jugar 🔄
-              </button>
-          )}
-      </div>
+      {!fin ? (
+        <button onClick={disparar}>Disparar 💥</button>
+      ) : (
+        <button onClick={reiniciar}>Volver a jugar 🔄</button>
+      )}
     </div>
-  )
+  );
 }
-
-export default Juego
