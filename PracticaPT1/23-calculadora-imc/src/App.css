@@ -1,0 +1,392 @@
+.calculadora-imc-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+}
+
+.sistema-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.sistema-toggle button {
+  padding: 0.75rem 2rem;
+  border: 2px solid white;
+  background: transparent;
+  color: white;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.sistema-toggle button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.sistema-toggle button.activo {
+  background: white;
+  color: #667eea;
+}
+
+.calculadora-grid {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.seccion-entrada {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.seccion-entrada h2 {
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.input-grupo {
+  margin-bottom: 1.5rem;
+}
+
+.input-grupo label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #555;
+}
+
+.input-grupo input,
+.input-grupo select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+.input-grupo input:focus,
+.input-grupo select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.botones-accion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.btn-guardar,
+.btn-resetear {
+  padding: 0.75rem;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-guardar {
+  background: #2ecc71;
+  color: white;
+}
+
+.btn-guardar:hover {
+  background: #27ae60;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-resetear {
+  background: #95a5a6;
+  color: white;
+}
+
+.btn-resetear:hover {
+  background: #7f8c8d;
+}
+
+.seccion-resultados {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.resultado-principal {
+  text-align: center;
+  padding: 2rem;
+  border: 4px solid;
+  border-radius: 20px;
+  margin-bottom: 2rem;
+}
+
+.imc-valor {
+  font-size: 5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.imc-label {
+  color: #7f8c8d;
+  font-size: 1rem;
+}
+
+.categoria-info {
+  padding: 1.5rem;
+  border-radius: 15px;
+  border: 2px solid;
+  margin-bottom: 2rem;
+}
+
+.categoria-info h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+}
+
+.categoria-info p {
+  margin: 0;
+  color: #555;
+  line-height: 1.6;
+}
+
+.indicador-visual {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.barra-categorias {
+  display: flex;
+  height: 30px;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.segmento-categoria {
+  flex: 1;
+  cursor: pointer;
+}
+
+.marcador-imc {
+  position: absolute;
+  top: -10px;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  color: #2c3e50;
+}
+
+.etiquetas-rango {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5%;
+  font-size: 0.85rem;
+  color: #7f8c8d;
+  font-weight: bold;
+}
+
+.info-peso-ideal {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 15px;
+  margin-bottom: 2rem;
+}
+
+.info-peso-ideal h4 {
+  margin: 0 0 1rem 0;
+  color: #333;
+}
+
+.info-peso-ideal p {
+  margin: 0.5rem 0;
+  color: #555;
+}
+
+.info-peso-ideal .exceso {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.info-peso-ideal .deficit {
+  color: #3498db;
+  font-weight: bold;
+}
+
+.tabla-referencia {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 15px;
+}
+
+.tabla-referencia h4 {
+  margin: 0 0 1rem 0;
+  color: #333;
+}
+
+.fila-categoria {
+  display: grid;
+  grid-template-columns: 30px 1fr auto;
+  gap: 1rem;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  background: white;
+  border-radius: 8px;
+  align-items: center;
+}
+
+.fila-categoria.actual {
+  background: #e8f4f8;
+  font-weight: bold;
+}
+
+.color-indicador {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.nombre-categoria {
+  color: #555;
+}
+
+.rango-categoria {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+.mensaje-inicial {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #95a5a6;
+}
+
+.mensaje-inicial p {
+  font-size: 1.2rem;
+}
+
+.seccion-historial {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.historial-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.historial-header h3 {
+  margin: 0;
+  color: #333;
+}
+
+.btn-limpiar-historial {
+  padding: 0.5rem 1rem;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.btn-limpiar-historial:hover {
+  background: #c0392b;
+}
+
+.historial-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.entrada-historial {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 12px;
+  border-left: 4px solid #667eea;
+}
+
+.entrada-fecha {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+  margin-bottom: 0.5rem;
+}
+
+.entrada-datos {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.imc-historial {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #667eea;
+}
+
+.categoria-historial {
+  background: #667eea;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+}
+
+.medidas-historial {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .calculadora-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .imc-valor {
+    font-size: 3.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .sistema-toggle {
+    flex-direction: column;
+  }
+
+  .imc-valor {
+    font-size: 3rem;
+  }
+
+  .entrada-datos {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
