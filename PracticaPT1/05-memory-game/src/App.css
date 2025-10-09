@@ -1,0 +1,146 @@
+.memory-container {
+  padding: 20px;
+  text-align: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+h1 {
+  color: white;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.info-panel {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  display: inline-block;
+}
+
+.info-panel h2 {
+  color: white;
+  margin: 0 0 15px 0;
+}
+
+.config {
+  margin-top: 15px;
+}
+
+.config label {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.config input {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid white;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  text-align: center;
+}
+
+.tablero-memory {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  gap: 15px;
+  justify-content: center;
+  margin: 30px auto;
+  max-width: 500px;
+}
+
+.carta-memoria {
+  width: 100px;
+  height: 100px;
+  background: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  user-select: none;
+}
+
+.carta-memoria:hover {
+  transform: scale(1.05);
+}
+
+.carta-memoria:not(.volteada) {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.carta-memoria.encontrada {
+  background: #4caf50;
+  animation: encontrada 0.5s;
+}
+
+@keyframes encontrada {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2) rotate(10deg);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+button {
+  padding: 15px 40px;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin: 10px;
+}
+
+.btn-iniciar {
+  background: #4caf50;
+  color: white;
+}
+
+.btn-iniciar:hover {
+  background: #45a049;
+  transform: scale(1.05);
+}
+
+.btn-reiniciar {
+  background: #2196f3;
+  color: white;
+}
+
+.btn-reiniciar:hover {
+  background: #0b7dda;
+  transform: scale(1.05);
+}
+
+.victoria {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 40px;
+  border-radius: 15px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.victoria h2 {
+  color: #4caf50;
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.victoria h3 {
+  color: #333;
+  font-size: 20px;
+  margin-bottom: 30px;
+}

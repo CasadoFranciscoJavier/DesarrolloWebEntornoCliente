@@ -1,0 +1,151 @@
+.snake-container {
+  padding: 20px;
+  text-align: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  color: white;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  font-size: 48px;
+}
+
+.info-panel {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  min-width: 300px;
+}
+
+.info-panel h2 {
+  color: white;
+  margin: 0 0 15px 0;
+}
+
+.config {
+  margin-top: 15px;
+}
+
+.config label {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 16px;
+}
+
+.config input[type="range"] {
+  width: 100%;
+}
+
+.instrucciones {
+  color: white;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.instrucciones p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.cuadricula {
+  border: 3px solid #2d3436;
+  background: #1e272e;
+  display: inline-block;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.fila-snake {
+  display: flex;
+}
+
+.celda {
+  width: 20px;
+  height: 20px;
+  background: #273c75;
+  border: 0.5px solid #192a56;
+}
+
+.cabeza-serpiente {
+  background: #44bd32;
+  border-radius: 3px;
+  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.cuerpo-serpiente {
+  background: #4cd137;
+  border-radius: 2px;
+}
+
+.comida {
+  background: radial-gradient(circle, #e74c3c, #c0392b);
+  border-radius: 50%;
+  animation: pulseFood 0.5s infinite alternate;
+}
+
+@keyframes pulseFood {
+  from {
+    transform: scale(0.8);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+button {
+  padding: 15px 40px;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin: 10px;
+}
+
+.btn-iniciar {
+  background: #4caf50;
+  color: white;
+}
+
+.btn-iniciar:hover {
+  background: #45a049;
+  transform: scale(1.05);
+}
+
+.btn-reiniciar {
+  background: #2196f3;
+  color: white;
+}
+
+.btn-reiniciar:hover {
+  background: #0b7dda;
+  transform: scale(1.05);
+}
+
+.game-over {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 40px;
+  border-radius: 15px;
+  color: white;
+}
+
+.game-over h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #e74c3c;
+}
+
+.game-over h3 {
+  font-size: 24px;
+  margin-bottom: 30px;
+}

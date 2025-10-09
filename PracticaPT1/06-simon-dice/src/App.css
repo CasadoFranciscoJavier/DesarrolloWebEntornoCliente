@@ -1,0 +1,157 @@
+.simon-container {
+  padding: 20px;
+  text-align: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+}
+
+h1 {
+  color: white;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.info-panel {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  display: inline-block;
+  min-width: 300px;
+}
+
+.info-panel h2 {
+  color: white;
+  margin: 0 0 15px 0;
+}
+
+.estado {
+  color: #3498db;
+  font-size: 18px;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.mensaje-error {
+  color: #e74c3c;
+  font-size: 18px;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.tablero-simon {
+  display: inline-block;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+}
+
+.fila-simon {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.fila-simon:last-child {
+  margin-bottom: 0;
+}
+
+.boton-simon {
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.boton-simon:hover {
+  transform: scale(1.05);
+}
+
+.boton-simon.rojo {
+  background: #e74c3c;
+}
+
+.boton-simon.rojo.activo {
+  background: #ff6b6b;
+  box-shadow: 0 0 30px #e74c3c;
+}
+
+.boton-simon.verde {
+  background: #27ae60;
+}
+
+.boton-simon.verde.activo {
+  background: #2ecc71;
+  box-shadow: 0 0 30px #27ae60;
+}
+
+.boton-simon.azul {
+  background: #3498db;
+}
+
+.boton-simon.azul.activo {
+  background: #5dade2;
+  box-shadow: 0 0 30px #3498db;
+}
+
+.boton-simon.amarillo {
+  background: #f39c12;
+}
+
+.boton-simon.amarillo.activo {
+  background: #f1c40f;
+  box-shadow: 0 0 30px #f39c12;
+}
+
+button {
+  padding: 15px 40px;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin: 10px;
+}
+
+.btn-iniciar {
+  background: #4caf50;
+  color: white;
+}
+
+.btn-iniciar:hover {
+  background: #45a049;
+  transform: scale(1.05);
+}
+
+.btn-reiniciar {
+  background: #2196f3;
+  color: white;
+}
+
+.btn-reiniciar:hover {
+  background: #0b7dda;
+  transform: scale(1.05);
+}
+
+.game-over {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 40px;
+  border-radius: 15px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.game-over h2 {
+  color: #e74c3c;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.game-over h3 {
+  color: #333;
+  font-size: 20px;
+  margin-bottom: 30px;
+}
