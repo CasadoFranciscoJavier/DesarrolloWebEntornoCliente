@@ -82,7 +82,7 @@ function Juego() {
         <h2>{ganador}</h2>
         <div className='row'>
 
-          <div className='col-6 px-2'>
+          <div className='col-6 px-3'>
             <Seleccion seleccion={seleccionJugador}></Seleccion>
             <button onClick={() => jugarTurno("🥌")}>🥌</button>
             <button onClick={() => jugarTurno("🧻")}>🧻</button>

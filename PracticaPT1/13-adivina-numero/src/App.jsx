@@ -163,8 +163,8 @@ export default function AdivinaNumero() {
                 placeholder="Tu número"
                 min={rangoMin}
                 max={rangoMax}
-                onKeyPress={(e) => {
-                  if (e.key === 'Enter') {
+                onKeyDown={(e) => {
+                  if (e.key == 'Enter') {
                     verificarIntento()
                   }
                 }}
