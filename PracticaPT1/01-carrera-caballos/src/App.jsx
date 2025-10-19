@@ -49,7 +49,13 @@ export default function CarreraCaballos() {
         return pos + avance
       })
 
-      const hayGanador = nuevasPosiciones.some(pos => pos >= META)
+      let hayGanador = false;
+
+      for (let i = 0; i < nuevasPosiciones.length && hayGanador == false; i++) {
+        if (nuevasPosiciones[i] >= META) {
+          hayGanador = true;
+        }
+      }
       if (hayGanador) {
         const indiceGanador = nuevasPosiciones.findIndex(pos => pos >= META)
         setGanador(indiceGanador)
@@ -62,14 +68,14 @@ export default function CarreraCaballos() {
   }
 
   function procesarApuesta(indiceGanador) {
-    if (apuestaSeleccionada === indiceGanador) {
+    if (apuestaSeleccionada == indiceGanador) {
       const ganancia = montoApuesta * numCaballos
       setSaldoActual(saldoActual + ganancia)
     }
   }
 
   function iniciarCarrera() {
-    if (apuestaSeleccionada === null) {
+    if (apuestaSeleccionada == null) {
       alert('Debes apostar primero')
       return
     }
@@ -117,7 +123,7 @@ export default function CarreraCaballos() {
           <button
             onClick={() => hacerApuesta(index)}
             disabled={carreraIniciada}
-            className={`boton-apuesta ${apuestaSeleccionada === index ? 'apuesta-activa' : ''}`}
+            className={`boton-apuesta ${apuestaSeleccionada == index ? 'apuesta-activa' : ''}`}
           >
             Caballo {index + 1} ({numCaballos}x)
           </button>
@@ -130,7 +136,7 @@ export default function CarreraCaballos() {
             </div>
             <div className="meta">🏁</div>
           </div>
-          {enMeta && ganador === index && <span className="badge-ganador">🏆 GANADOR</span>}
+          {enMeta && ganador == index && <span className="badge-ganador">🏆 GANADOR</span>}
         </div>
       )
     })
@@ -168,14 +174,14 @@ export default function CarreraCaballos() {
         </div>
 
         <div className="saldo">
-          <h3>💰 Saldo: ${saldoActual}</h3>
+          <h3>💰 Saldo: {saldoActual}€ </h3>
           {apuestaSeleccionada !== null && !carreraIniciada && (
-            <p>Apostando ${montoApuesta} al Caballo {apuestaSeleccionada + 1}</p>
+            <p>Apostando {montoApuesta}€ al Caballo {apuestaSeleccionada + 1}</p>
           )}
         </div>
 
         <div className="botones">
-          {!carreraIniciada && ganador === null && (
+          {!carreraIniciada && ganador == null && (
             <button onClick={iniciarCarrera} className="btn-iniciar">
               ¡Iniciar Carrera!
             </button>
@@ -184,9 +190,9 @@ export default function CarreraCaballos() {
           {ganador !== null && (
             <>
               <h2>
-                {apuestaSeleccionada === ganador
-                  ? `¡GANASTE! +$${montoApuesta * numCaballos}`
-                  : `Perdiste -$${montoApuesta}`}
+                {apuestaSeleccionada == ganador
+                  ? `¡GANASTE! +${montoApuesta * numCaballos}€`
+                  : `Perdiste -${montoApuesta}€`}
               </h2>
               <button onClick={inicializarCarrera} className="btn-reiniciar">
                 Nueva Carrera
@@ -194,7 +200,7 @@ export default function CarreraCaballos() {
             </>
           )}
 
-          {saldoActual === 0 && (
+          {saldoActual == 0 && (
             <button onClick={reiniciarJuego} className="btn-reset">
               Reiniciar Juego
             </button>

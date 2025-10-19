@@ -57,43 +57,43 @@ export default function DadosCasino() {
     let gano = false
     let multiplicador = 1
 
-    if (tipoApuesta === 'suma') {
+    if (tipoApuesta == 'suma') {
       const suma = dadosFinales.reduce((acc, val) => acc + val, 0)
-      if (suma === valorApuesta) {
+      if (suma == valorApuesta) {
         gano = true
-        multiplicador = numDados === 2 ? 5 : numDados === 3 ? 8 : 10
+        multiplicador = numDados == 2 ? 5 : numDados == 3 ? 8 : 10
       }
-    } else if (tipoApuesta === 'mayor') {
+    } else if (tipoApuesta == 'mayor') {
       const suma = dadosFinales.reduce((acc, val) => acc + val, 0)
       const mitad = (numDados * 6) / 2
       if (suma > mitad) {
         gano = true
         multiplicador = 2
       }
-    } else if (tipoApuesta === 'menor') {
+    } else if (tipoApuesta == 'menor') {
       const suma = dadosFinales.reduce((acc, val) => acc + val, 0)
       const mitad = (numDados * 6) / 2
       if (suma < mitad) {
         gano = true
         multiplicador = 2
       }
-    } else if (tipoApuesta === 'pares') {
-      const todosPares = dadosFinales.every(dado => dado % 2 === 0)
+    } else if (tipoApuesta == 'pares') {
+      const todosPares = dadosFinales.every(dado => dado % 2 == 0)
       if (todosPares) {
         gano = true
         multiplicador = 3
       }
-    } else if (tipoApuesta === 'impares') {
+    } else if (tipoApuesta == 'impares') {
       const todosImpares = dadosFinales.every(dado => dado % 2 !== 0)
       if (todosImpares) {
         gano = true
         multiplicador = 3
       }
-    } else if (tipoApuesta === 'iguales') {
-      const todosIguales = dadosFinales.every(dado => dado === dadosFinales[0])
+    } else if (tipoApuesta == 'iguales') {
+      const todosIguales = dadosFinales.every(dado => dado == dadosFinales[0])
       if (todosIguales) {
         gano = true
-        multiplicador = numDados === 2 ? 10 : numDados === 3 ? 20 : 30
+        multiplicador = numDados == 2 ? 10 : numDados == 3 ? 20 : 30
       }
     }
 
@@ -181,49 +181,49 @@ export default function DadosCasino() {
         <div className="opciones-apuesta">
           <button
             onClick={() => setTipoApuesta('suma')}
-            className={tipoApuesta === 'suma' ? 'activo' : ''}
+            className={tipoApuesta == 'suma' ? 'activo' : ''}
             disabled={lanzando}
           >
             Suma exacta
           </button>
           <button
             onClick={() => setTipoApuesta('mayor')}
-            className={tipoApuesta === 'mayor' ? 'activo' : ''}
+            className={tipoApuesta == 'mayor' ? 'activo' : ''}
             disabled={lanzando}
           >
             Mayor
           </button>
           <button
             onClick={() => setTipoApuesta('menor')}
-            className={tipoApuesta === 'menor' ? 'activo' : ''}
+            className={tipoApuesta == 'menor' ? 'activo' : ''}
             disabled={lanzando}
           >
             Menor
           </button>
           <button
             onClick={() => setTipoApuesta('pares')}
-            className={tipoApuesta === 'pares' ? 'activo' : ''}
+            className={tipoApuesta == 'pares' ? 'activo' : ''}
             disabled={lanzando}
           >
             Todos pares
           </button>
           <button
             onClick={() => setTipoApuesta('impares')}
-            className={tipoApuesta === 'impares' ? 'activo' : ''}
+            className={tipoApuesta == 'impares' ? 'activo' : ''}
             disabled={lanzando}
           >
             Todos impares
           </button>
           <button
             onClick={() => setTipoApuesta('iguales')}
-            className={tipoApuesta === 'iguales' ? 'activo' : ''}
+            className={tipoApuesta == 'iguales' ? 'activo' : ''}
             disabled={lanzando}
           >
             Todos iguales
           </button>
         </div>
 
-        {tipoApuesta === 'suma' && (
+        {tipoApuesta == 'suma' && (
           <div className="config-suma">
             <label>
               Apostar a suma:
@@ -241,10 +241,10 @@ export default function DadosCasino() {
 
       <div className="info-premios">
         <h4>Multiplicadores:</h4>
-        <p>Suma exacta: x{numDados === 2 ? 5 : numDados === 3 ? 8 : 10}</p>
+        <p>Suma exacta: x{numDados == 2 ? 5 : numDados == 3 ? 8 : 10}</p>
         <p>Mayor/Menor: x2</p>
         <p>Todos pares/impares: x3</p>
-        <p>Todos iguales: x{numDados === 2 ? 10 : numDados === 3 ? 20 : 30}</p>
+        <p>Todos iguales: x{numDados == 2 ? 10 : numDados == 3 ? 20 : 30}</p>
       </div>
 
       {mensaje && (
@@ -261,7 +261,7 @@ export default function DadosCasino() {
         {lanzando ? 'Lanzando...' : 'Lanzar Dados'}
       </button>
 
-      {saldo === 0 && (
+      {saldo == 0 && (
         <button onClick={reiniciarJuego} className="btn-reset">
           Reiniciar Juego
         </button>

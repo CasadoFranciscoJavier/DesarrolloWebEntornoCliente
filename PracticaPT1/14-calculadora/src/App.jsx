@@ -13,7 +13,7 @@ export default function Calculadora() {
       setValorActual(num.toString())
       setNuevoNumero(false)
     } else {
-      setValorActual(valorActual === '0' ? num.toString() : valorActual + num)
+      setValorActual(valorActual == '0' ? num.toString() : valorActual + num)
     }
   }
 
@@ -34,19 +34,19 @@ export default function Calculadora() {
   }
 
   function calcular() {
-    if (valorAnterior === '' || operacion === '') return
+    if (valorAnterior == '' || operacion == '') return
 
     const anterior = parseFloat(valorAnterior)
     const actual = parseFloat(valorActual)
     let resultado = 0
 
-    if (operacion === '+') {
+    if (operacion == '+') {
       resultado = anterior + actual
-    } else if (operacion === '-') {
+    } else if (operacion == '-') {
       resultado = anterior - actual
-    } else if (operacion === '*') {
+    } else if (operacion == '*') {
       resultado = anterior * actual
-    } else if (operacion === '/') {
+    } else if (operacion == '/') {
       resultado = actual !== 0 ? anterior / actual : 0
     }
 
@@ -111,13 +111,13 @@ export default function Calculadora() {
     return botones.map((boton, index) => {
       let onClick = () => {}
 
-      if (boton.tipo === 'numero') {
+      if (boton.tipo == 'numero') {
         onClick = () => agregarNumero(boton.valor)
-      } else if (boton.tipo === 'operacion') {
+      } else if (boton.tipo == 'operacion') {
         onClick = () => seleccionarOperacion(boton.valor)
-      } else if (boton.tipo === 'punto') {
+      } else if (boton.tipo == 'punto') {
         onClick = agregarPunto
-      } else if (boton.tipo === 'igual') {
+      } else if (boton.tipo == 'igual') {
         onClick = calcular
       }
 
