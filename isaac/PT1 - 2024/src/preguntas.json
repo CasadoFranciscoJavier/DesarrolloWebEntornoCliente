@@ -1,0 +1,102 @@
+[
+  {
+    "pregunta": "¿Cuál es la capital de España?",
+    "opciones": ["Madrid", "Barcelona", "Sevilla", "Valencia"],
+    "respuesta": "Madrid"
+  },
+  {
+    "pregunta": "¿Quién pintó la Mona Lisa?",
+    "opciones": ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Claude Monet"],
+    "respuesta": "Leonardo da Vinci"
+  },
+  {
+    "pregunta": "¿Cuál es el océano más grande del mundo?",
+    "opciones": ["Atlántico", "Índico", "Ártico", "Pacífico"],
+    "respuesta": "Pacífico"
+  },
+  {
+    "pregunta": "¿En qué año llegó el hombre a la Luna?",
+    "opciones": ["1959", "1969", "1979", "1989"],
+    "respuesta": "1969"
+  },
+  {
+    "pregunta": "¿Cuál es el metal más utilizado en la fabricación de aviones?",
+    "opciones": ["Aluminio", "Hierro", "Oro", "Cobre"],
+    "respuesta": "Aluminio"
+  },
+  {
+    "pregunta": "¿Quién es el autor de 'Don Quijote de la Mancha'?",
+    "opciones": ["Federico García Lorca", "Miguel de Cervantes", "Gabriel García Márquez", "Mario Vargas Llosa"],
+    "respuesta": "Miguel de Cervantes"
+  },
+  {
+    "pregunta": "¿Qué planeta es conocido como el planeta rojo?",
+    "opciones": ["Marte", "Venus", "Júpiter", "Saturno"],
+    "respuesta": "Marte"
+  },
+  {
+    "pregunta": "¿Cuál es el país más grande del mundo?",
+    "opciones": ["China", "Estados Unidos", "Rusia", "Brasil"],
+    "respuesta": "Rusia"
+  },
+  {
+    "pregunta": "¿Qué país es conocido como la cuna del Renacimiento?",
+    "opciones": ["España", "Grecia", "Francia", "Italia"],
+    "respuesta": "Italia"
+  },
+  {
+    "pregunta": "¿Cuál es el río más largo del mundo?",
+    "opciones": ["Amazonas", "Nilo", "Yangtsé", "Misisipi"],
+    "respuesta": "Amazonas"
+  },
+  {
+    "pregunta": "¿Cuál es el país con más habitantes en el mundo?",
+    "opciones": ["India", "China", "Estados Unidos", "Rusia"],
+    "respuesta": "China"
+  },
+  {
+    "pregunta": "¿En qué país se encuentran las pirámides de Giza?",
+    "opciones": ["México", "Perú", "Egipto", "India"],
+    "respuesta": "Egipto"
+  },
+  {
+    "pregunta": "¿Qué científico desarrolló la teoría de la relatividad?",
+    "opciones": ["Isaac Newton", "Albert Einstein", "Nikola Tesla", "Galileo Galilei"],
+    "respuesta": "Albert Einstein"
+  },
+  {
+    "pregunta": "¿En qué continente se encuentra el desierto del Sahara?",
+    "opciones": ["Asia", "África", "Oceanía", "América"],
+    "respuesta": "África"
+  },
+  {
+    "pregunta": "¿Cuál es el animal terrestre más rápido del mundo?",
+    "opciones": ["Guepardo", "León", "Caballo", "Lobo"],
+    "respuesta": "Guepardo"
+  },
+  {
+    "pregunta": "¿Qué instrumento se utiliza para medir la presión atmosférica?",
+    "opciones": ["Termómetro", "Barómetro", "Higrómetro", "Anemómetro"],
+    "respuesta": "Barómetro"
+  },
+  {
+    "pregunta": "¿Qué tipo de animal es la ballena?",
+    "opciones": ["Pez", "Mamífero", "Reptil", "Anfibio"],
+    "respuesta": "Mamífero"
+  },
+  {
+    "pregunta": "¿Cuál es el elemento químico más abundante en la atmósfera?",
+    "opciones": ["Oxígeno", "Nitrógeno", "Hidrógeno", "Carbono"],
+    "respuesta": "Nitrógeno"
+  },
+  {
+    "pregunta": "¿Qué artista es conocido por pintar el techo de la Capilla Sixtina?",
+    "opciones": ["Leonardo da Vinci", "Miguel Ángel", "Rafael", "Donatello"],
+    "respuesta": "Miguel Ángel"
+  },
+  {
+    "pregunta": "¿Cuál es el idioma más hablado en el mundo?",
+    "opciones": ["Inglés", "Español", "Chino Mandarín", "Hindú"],
+    "respuesta": "Chino Mandarín"
+  }
+]
