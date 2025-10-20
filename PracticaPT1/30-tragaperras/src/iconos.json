@@ -1,8 +1,8 @@
 [
-  { "id": 1, "nombre": "cereza", "imagen": "cereza.png" },
-  { "id": 2, "nombre": "limon", "imagen": "limon.png" },
-  { "id": 3, "nombre": "uva", "imagen": "uva.png" },
-  { "id": 4, "nombre": "siete", "imagen": "siete.jpg" },
-  { "id": 5, "nombre": "campana", "imagen": "campana.png" },
-  { "id": 6, "nombre": "bar", "imagen": "bar.jpg" }
+  { "nombre": "cereza", "imagen": "cereza.png", "multiplicador": 2 },
+  { "nombre": "limon", "imagen": "limon.png", "multiplicador": 3 },
+  { "nombre": "uva", "imagen": "uva.png", "multiplicador": 4 },
+  { "nombre": "siete", "imagen": "siete.jpg", "multiplicador": 5 },
+  { "nombre": "campana", "imagen": "campana.png", "multiplicador": 10 },
+  { "nombre": "bar", "imagen": "bar.jpg", "multiplicador": 15 }
 ]
