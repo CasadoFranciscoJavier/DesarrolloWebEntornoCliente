@@ -1,0 +1,39 @@
+/* .contenedor-cartas {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  gap: 10px;
+  justify-content: center;
+}
+
+.carta {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+} */
+
+.contenedor-cartas {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  gap: 10px;
+  justify-content: center;
+
+}
+
+.carta {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  border-radius: 8px;
+
+
+}
+
+.carta:hover {
+  transform: scale(1.05);
+}
+
+.carta img {
+  width: 100%;
+  height: 100%;
+}
+

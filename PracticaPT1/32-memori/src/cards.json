@@ -1,0 +1,14 @@
+[
+  { "id": 1, "nombre": "gorila", "imagen": "gorila.jpg" },
+  { "id": 1, "nombre": "gorila", "imagen": "gorila.jpg" },
+  { "id": 2, "nombre": "orangutan", "imagen": "orangutan.jpg" },
+  { "id": 2, "nombre": "orangutan", "imagen": "orangutan.jpg" },
+  { "id": 3, "nombre": "mono", "imagen": "mono.jpg" },
+  { "id": 3, "nombre": "mono", "imagen": "mono.jpg" },
+  { "id": 4, "nombre": "cobra", "imagen": "cobra.jpg" },
+  { "id": 4, "nombre": "cobra", "imagen": "cobra.jpg" },
+  { "id": 5, "nombre": "rana", "imagen": "rana.jpg" },
+  { "id": 5, "nombre": "rana", "imagen": "rana.jpg" },
+  { "id": 6, "nombre": "cocodrilo", "imagen": "cocodrilo.jpg" },
+  { "id": 6, "nombre": "cocodrilo", "imagen": "cocodrilo.jpg" }
+]
