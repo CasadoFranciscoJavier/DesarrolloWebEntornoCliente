@@ -85,3 +85,56 @@ export default function Trivial() {
   </div>
  );
 }
+
+//--------------------------------------------
+
+function barajarArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+
+  return array;
+}
+
+
+
+// tambien podriamos barajar las preguntas al iniciar el juego y luego ir sacandolas una a una sin repetir
+// --- Arrays de ejemplo ---
+const arrayFrutas = ["Manzana", "Pera", "Naranja", "Fresa", "Uva", "Melón"];
+const arrayNumeros = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+const arrayPalabrasAhorcado = ["murcielago", "camaleon", "espejismo", "laberinto"]; // Como el JSON de tu Ahorcado
+
+// --- Aplicando la función de barajado ---
+
+// 1. Barajar el array de frutas
+const frutasMezcladas = barajarArray(arrayFrutas);
+console.log("Frutas barajadas:", frutasMezcladas);
+// Una posible salida: ["Fresa", "Melón", "Pera", "Naranja", "Manzana", "Uva"]
+
+// 2. Barajar el array de números
+const numerosMezclados = barajarArray(arrayNumeros);
+console.log("Números barajados:", numerosMezclados);
+// Una posible salida: [40, 70, 10, 100, 20, 80, 50, 90, 30, 60]
+
+// 3. Barajar el array de palabras para seleccionar una (opciones de respuesta)
+const palabrasMezcladas = barajarArray(arrayPalabrasAhorcado);
+console.log("Palabras barajadas:", palabrasMezcladas);
+// Una posible salida: ["espejismo", "laberinto", "murcielago", "camaleon"]
+
+
+//Nota Importante
+// La función barajarArray modifica el array original (arrayFrutas, arrayNumeros, etc.). Si necesitas 
+// conservar el array original sin modificarlo, debes pasar una copia a la función:
+const arrayOriginal = [1, 2, 3];
+// Copiamos el array antes de barajar usando el operador spread (...)
+const arrayCopiaBarajada = barajarArray([...arrayOriginal]);
+
+console.log("Copia barajada:", arrayCopiaBarajada); // Desordenado
+console.log("Array Original:", arrayOriginal);      // Sigue siendo [1, 2, 3]
+
+// en nuestro caso de las preguntas sería:
+const preguntasMezcladas = barajarArray([...preguntas]);
+console.log("Preguntas barajadas:", preguntasMezcladas);
+     
