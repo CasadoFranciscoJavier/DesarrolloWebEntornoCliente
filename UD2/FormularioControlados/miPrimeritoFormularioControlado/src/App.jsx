@@ -30,6 +30,33 @@ function validarEmail(email) {
   return mensaje
 }
 
+function validarContrasenia(contrasenia) {
+  let mensaje = "";
+
+  if (contrasenia.length < 6) {
+    mensaje = 'La contraseña debe tener al menos 6 caracteres.';
+  }
+  if (contrasenia.length > 20) {
+    mensaje = 'La contraseña no puede superar los 20 caracteres.';
+  }
+
+  if (!/[a-z]/.test(contrasenia)) {
+    mensaje = 'Debe contener al menos una letra minúscula.';
+  }
+
+  if (!/[A-Z]/.test(contrasenia)) {
+    mensaje = 'Debe contener al menos una letra mayúscula.';
+  }
+
+
+  if (!/[0-9]/.test(contrasenia)) {
+    mensaje = 'Debe contener al menos un número.';
+  }
+
+  return mensaje;
+}
+
+
 
 
 function MiPrimeritoFormulario() {
@@ -57,7 +84,7 @@ function MiPrimeritoFormulario() {
     if (name == 'nombre') mensajeError = validarNombre(value)
     if (name == 'edad') mensajeError = validarEdad(value)
     if (name == 'email') mensajeError = validarEmail(value)
-    
+    if (name == 'contrasenia') mensajeError = validarContrasenia(value)
 
     setErrores({ ...errores, [name]: mensajeError })
   }
@@ -95,6 +122,7 @@ function MiPrimeritoFormulario() {
       <div>
         <label>Contraseña:</label>
         <input type="password" name="contrasenia" value={form.contrasenia} onChange={handleChange} />
+        {errores.contrasenia && <p style={{ color: 'red' }}>{errores.contrasenia}</p>}
       </div>
 
       <button type="submit">Enviar</button>
