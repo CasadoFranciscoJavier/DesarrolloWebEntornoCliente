@@ -91,11 +91,11 @@ function MiPrimeritoFormulario() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (errores) {
-      console.log('Existen errores en el formulario')
-    } else {
-      console.log('Datos enviados:', form)
+    if (errores.nombre || errores.edad || errores.email || errores.contrasenia) {
+      alert('Por favor, corrija los errores antes de enviar el formulario.')
+      return
     }
+    alert('Formulario enviado con exito!')
     
   }
 
