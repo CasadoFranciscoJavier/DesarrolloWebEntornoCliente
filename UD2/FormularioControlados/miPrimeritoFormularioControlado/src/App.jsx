@@ -1,10 +1,6 @@
 import { useState } from 'react'
 import './App.css'
 
-
-
-
-
 function validarNombre(nombre) {
   let mensaje = ""
   if (!nombre) mensaje = 'El nombre es obligatorio.'
@@ -57,10 +53,8 @@ function validarContrasenia(contrasenia) {
 }
 
 
-
-
 function MiPrimeritoFormulario() {
-  const [form, setForm] = useState({
+  const [usuario, setUsuario] = useState({
     nombre: '',
     edad: '',
     email: '',
@@ -76,9 +70,9 @@ function MiPrimeritoFormulario() {
 
   
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setForm({ ...form, [name]: value })
+  const validarInput = (input) => {
+    const { name, value } = input.target
+    setUsuario({ ...usuario, [name]: value })
 
     let mensajeError = ''
     if (name == 'nombre') mensajeError = validarNombre(value)
@@ -89,13 +83,16 @@ function MiPrimeritoFormulario() {
     setErrores({ ...errores, [name]: mensajeError })
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = (formulario) => {
+    formulario.preventDefault()
     if (errores.nombre || errores.edad || errores.email || errores.contrasenia) {
-      alert('Por favor, corrija los errores antes de enviar el formulario.')
+      alert('Por favor, corrija los errores antes de enviar el Formulario.')
       return
+    }else {
+        alert('Formulario enviado con exito!')
+    console.log('datos enviados:', usuario)
     }
-    alert('Formulario enviado con exito!')
+  
     
   }
 
@@ -103,25 +100,25 @@ function MiPrimeritoFormulario() {
     <form onSubmit={handleSubmit}>
       <div>
         <label>Nombre:</label>
-        <input type="text" name="nombre" value={form.nombre} onChange={handleChange} />
+        <input type="text" name="nombre" value={usuario.nombre} onChange={validarInput} />
         {errores.nombre && <p style={{ color: 'red' }}>{errores.nombre}</p>}
       </div>
 
       <div>
         <label>Edad:</label>
-        <input type="number" name="edad" value={form.edad} onChange={handleChange} />
+        <input type="number" name="edad" value={usuario.edad} onChange={validarInput} />
         {errores.edad && <p style={{ color: 'red' }}>{errores.edad}</p>}
       </div>
 
       <div>
         <label>Email:</label>
-        <input type="email" name="email" value={form.email} onChange={handleChange} />
+        <input type="email" name="email" value={usuario.email} onChange={validarInput} />
         {errores.email && <p style={{ color: 'red' }}>{errores.email}</p>}
       </div>
 
       <div>
         <label>Contraseña:</label>
-        <input type="password" name="contrasenia" value={form.contrasenia} onChange={handleChange} />
+        <input type="password" name="contrasenia" value={usuario.contrasenia} onChange={validarInput} />
         {errores.contrasenia && <p style={{ color: 'red' }}>{errores.contrasenia}</p>}
       </div>
 
