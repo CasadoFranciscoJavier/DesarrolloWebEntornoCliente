@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useEffect } from "react";
 import "./App.css";
 
 import galletaImg from "./img/galleta.png";
@@ -15,17 +15,45 @@ const initialState = {
   grandmaPrice: 100,
 };
 
+
+
 function contadorReducer(state, action) {
-  let nuevoEstado = state;
- 
-  if (action.tipo == "cursor" && cookies >= cursorPrice) {
-    nuevoEstado = { ...state, cursorCount: state.cursorCount + 1};
-  } else if (action.tipo == "multiplicador") {
-    nuevoEstado = { ...state, clickMultiplier: state.clickMultiplier + 1 };
-  } else if (action.tipo == "abuela") {
-    nuevoEstado = { ...state, grandmaCount: state.grandmaCount + 1 };
+
+  let nuevoEstado = { ...state };
+
+  if (action.tipo == "cursor" && state.cookies >= state.cursorPrice) {
+    nuevoEstado = {
+      ...state,
+      cookies: state.cookies - state.cursorPrice,
+      cursorCount: state.cursorCount + 1,
+      cursorPrice: Math.round(state.cursorPrice * 1.1)
+    };
+
+  } else if (action.tipo == "multiplicador" && state.cookies >= state.multiplierPrice) {
+    nuevoEstado = {
+      ...state,
+      cookies: state.cookies - state.multiplierPrice,
+      clickMultiplier: state.clickMultiplier + 1,
+      multiplierPrice: Math.round(state.multiplierPrice * 1.2)
+    };
+
+  } else if (action.tipo == "abuela" && state.cookies >= state.grandmaPrice) {
+    nuevoEstado = {
+      ...state,
+      cookies: state.cookies - state.grandmaPrice,
+      grandmaCount: state.grandmaCount + 1,
+      grandmaPrice: Math.round(state.grandmaPrice * 1.3)
+    };
+
   } else if (action.tipo == "galleta") {
-    nuevoEstado = { ...state, cookies: state.cookies + 1 };
+    nuevoEstado = { ...state, cookies: state.cookies + state.clickMultiplier };
+  }
+
+  if (action.tipo == "auto") {
+    nuevoEstado = {
+      ...state,
+      cookies: state.cookies + action.cantidad
+    };
   }
 
   return nuevoEstado;
@@ -33,6 +61,24 @@ function contadorReducer(state, action) {
 
 function Contador() {
   const [state, dispatch] = useReducer(contadorReducer, initialState);
+
+  useEffect(() => {
+  const id = setInterval(() => {
+
+    const cookiesPorCursor = state.cursorCount * 0.1;
+    const cookiesPorAbuela = state.grandmaCount * state.clickMultiplier;
+
+    const total = cookiesPorCursor + cookiesPorAbuela;
+
+    if (total > 0) {
+      dispatch({ tipo: "auto", cantidad: total });
+    }
+
+  }, 1000);
+
+  return () => clearInterval(id);
+}, [state.cursorCount, state.grandmaCount, state.clickMultiplier]);
+
 
   return (
     <div className="app">
@@ -45,7 +91,7 @@ function Contador() {
         >
           <img src={galletaImg} alt="Galleta" width="120" />
           <br />
-          Cookies: {state.cookies}
+          Cookies: {Math.floor(state.cookies)}
         </button>
       </div>
 
