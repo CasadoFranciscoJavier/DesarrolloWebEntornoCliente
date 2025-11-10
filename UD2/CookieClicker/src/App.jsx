@@ -20,7 +20,7 @@ const initialState = {
 function contadorReducer(state, action) {
 
   let nuevoEstado = { ...state };
-
+                                                                                                              
   if (action.tipo == "cursor" && state.cookies >= state.cursorPrice) {
     nuevoEstado = {
       ...state,
@@ -63,21 +63,21 @@ function Contador() {
   const [state, dispatch] = useReducer(contadorReducer, initialState);
 
   useEffect(() => {
-  const id = setInterval(() => {
+    const id = setInterval(() => {
 
-    const cookiesPorCursor = state.cursorCount * 0.1;
-    const cookiesPorAbuela = state.grandmaCount * state.clickMultiplier;
+      const cookiesPorCursor = state.cursorCount * 0.1;
+      const cookiesPorAbuela = state.grandmaCount * state.clickMultiplier;
 
-    const total = cookiesPorCursor + cookiesPorAbuela;
+      const total = cookiesPorCursor + cookiesPorAbuela;
 
-    if (total > 0) {
-      dispatch({ tipo: "auto", cantidad: total });
-    }
+      if (total > 0) {
+        dispatch({ tipo: "auto", cantidad: total });
+      }
 
-  }, 1000);
+    }, 1000);
 
-  return () => clearInterval(id);
-}, [state.cursorCount, state.grandmaCount, state.clickMultiplier]);
+    return () => clearInterval(id);
+  }, [state.cursorCount, state.grandmaCount, state.clickMultiplier]);
 
 
   return (
@@ -114,7 +114,7 @@ function Contador() {
           <i className="fa fa-times"></i>
           <br />
           Multiplicador (x{state.clickMultiplier})
-           <br />
+          <br />
           Precio: {state.multiplierPrice}
         </button>
 
@@ -125,7 +125,7 @@ function Contador() {
           <img src={abuelaImg} alt="Abuela" width="50" />
           <br />
           Abuela (x{state.grandmaCount})
-           <br />
+          <br />
           Precio: {state.grandmaPrice}
         </button>
       </div>
