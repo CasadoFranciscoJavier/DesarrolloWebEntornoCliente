@@ -1,62 +1,140 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* App.css */
+
+/* General */
+.app {
+  font-family: Arial, sans-serif;
   text-align: center;
+  padding: 20px;
+  background: #083f01;
+  color: #fff;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.panelInfoJugador {
+  margin-bottom: 20px;
 }
 
 .ruletaLoader {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 2rem;
-
+  margin: 20px auto;
 }
 
+.palancaContainer button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+}
 
 .girando {
   animation: girar 3s ease-out;
 }
 
 @keyframes girar {
-  to {
-    transform: rotate(5turn);
-  
-  }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(3turn); }
+}
+
+/* Tablero */
+.tableroContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.tableroRuleta {
+  display: grid;
+  grid-template-columns: repeat(13, 50px); /* 12 números + columna 0 */
+  grid-template-rows: repeat(4, 50px); /* 3 filas de números + fila de apuestas */
+  gap: 4px;
+}
+
+/* Cero */
+.cero {
+  background-color: green;
+  color: #fff;
+  font-weight: bold;
+  grid-row: 1 / 4; /* ocupa las 3 filas verticales */
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Números */
+.numero {
+  border-radius: 5px;
+  border: 1px solid #333;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.numero.rojo {
+  background-color: red;
+  color: white;
+}
+
+.numero.negro {
+  background-color: black;
+  color: white;
+}
+
+.numero:hover {
+  transform: scale(1.1);
+  transition: 0.1s;
+}
+
+/* Botones de apuesta especiales */
+.columna-bet, .docena-bet, .color-bet {
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  color: #fff;
+  height: 40px;
+}
+
+.columna-bet {
+  background-color: #555;
+}
+
+.docena-bet {
+  background-color: #666;
+}
+
+.color-bet.rojo {
+  background-color: red;
+}
+
+.color-bet.negro {
+  background-color: black;
+}
+
+/* Modal */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right:0;
+  bottom:0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContent {
+  background: #111;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.modalContent button {
+  margin: 5px;
+  padding: 5px 15px;
+  cursor: pointer;
+}
+
+.modalError {
+  color: #ff5555;
+  margin-top: 10px;
+  font-weight: bold;
 }
