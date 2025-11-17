@@ -1,14 +1,11 @@
 import { useState } from "react";
 import "./App.css";
 
-// --- IMPORTACIONES DE IMAGEN RESTAURADAS (TUS RUTAS ORIGINALES) ---
 import ruletaImg from "./assets/ruleta.png";
 import palancaOffImg from "./assets/palanca-off.png";
 import palancaOnImg from "./assets/palanca-on.png";
 
 
-// --- DATOS MAESTROS ---
-// 1. Array "maestro" con la info correcta de CADA número y su color real.
 const infoCasillas = [
   { numero: 0, color: "Verde" },
   { numero: 1, color: "Rojo" }, { numero: 2, color: "Negro" }, { numero: 3, color: "Rojo" },
@@ -25,15 +22,12 @@ const infoCasillas = [
   { numero: 34, color: "Rojo" }, { numero: 35, color: "Negro" }, { numero: 36, color: "Rojo" },
 ];
 
-// 2. Arrays para definir el LAYOUT (la vista) del tablero.
 const filaSuperior = [3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36];
 const filaMedia =    [2, 5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 35];
 const filaInferior = [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34];
 
-// Helper para buscar el color de un número en nuestro array maestro
 function getInfoNumero(numero) {
   // .find() es un método de array, busca el primer elemento que cumpla la condición.
-  // No usamos 'break' ni 'continue' aquí.
   const info = infoCasillas.find(casilla => casilla.numero == numero);
   
   // Si no lo encuentra (aunque no debería pasar), devolvemos algo por defecto
@@ -53,7 +47,6 @@ function App() {
   const [apuesta, setApuesta] = useState(0);
   const [modalApuestasAbierto, setModalApuestasAbierto] = useState(false);
   const [apuestaTemporal, setApuestaTemporal] = useState(5);
-  // Añadimos un estado para el error del modal, para no usar alert()
   const [errorModal, setErrorModal] = useState("");
 
 
@@ -63,20 +56,16 @@ function App() {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  // --- LÓGICA MODIFICADA ---
   const casilleroApuestas = () => {
-    // Obtenemos un índice aleatorio (0 a 36, total 37 números)
     let indice = getRandomInt(0, 36);
-    // Usamos el array maestro 'infoCasillas'
     setNumeroAleatorio(infoCasillas[indice].numero);
     setColorAleatorio(infoCasillas[indice].color);
   };
 
   const abrirModalApuestas = (tipo, valor) => {
-    // Ahora podemos guardar qué se está apostando (opcional, pero útil)
     console.log(`Iniciando apuesta a: ${tipo} ${valor}`);
     setApuestaTemporal(5);
-    setErrorModal(""); // Limpiamos errores al abrir
+    setErrorModal("");
     setModalApuestasAbierto(true);
   };
 
@@ -97,18 +86,15 @@ function App() {
 
     if (esValida) {
       setSaldo((saldo) => saldo - apuestaTemporal);
-      setApuesta((apuesta) => apuesta + apuestaTemporal); // Sumamos al total apostado
+      setApuesta((apuesta) => apuesta + apuestaTemporal); 
       setModalApuestasAbierto(false);
-      // No giramos aquí, solo confirmamos la apuesta.
-      // El usuario puede querer hacer varias apuestas.
+   
     }
   };
 
-  // Esta función ahora solo GIRA, no confirma la apuesta
   const jugarRuleta = () => {
     if (apuesta == 0) {
-      // No gira si no hay apuesta
-      alert("Debes confirmar al menos una apuesta."); // Dejamos este alert simple por ahora
+      alert("Debes confirmar al menos una apuesta."); 
       return;
     }
     setEstaGirando(true);
@@ -118,7 +104,6 @@ function App() {
       console.log("Apostaste en total:", apuesta);
       // Aquí calcula ganancias según apuesta y resultado
       
-      // Reseteamos la apuesta total para la siguiente ronda
       setApuesta(0); 
     }, 3000);
   };
@@ -141,7 +126,6 @@ function App() {
     )
   }
 
-  // --- RENDERIZADO ---
   return (
     <div className="app">
       <h2>RULETA</h2>
@@ -183,18 +167,17 @@ function App() {
           style={{ width: "400px", height: "auto" }}
         />
         <div className="palancaContainer">
-          {/* Modificamos el botón para que llame a jugarRuleta */}
           <button onClick={jugarRuleta} disabled={estaGirando || apuesta == 0}>
             <img src={estadoPalancaImg} alt="Palanca" width="120" /> Gira la ruleta
           </button>
         </div>
       </div>
 
-      {/* --- RENDERIZADO DEL TABLERO (MODIFICADO) --- */}
+      {/* RENDERIZADO DEL TABLERO */}
       <div className="tableroContainer">
         <div className="tableroRuleta">
           
-          {/* Cero */}
+         
           <button
             className="cero"
             onClick={() => abrirModalApuestas('numero', 0)}
@@ -202,17 +185,15 @@ function App() {
             0
           </button>
 
-          {/* Fila Superior (3, 6, 9...) */}
+        
           {filaSuperior.map((num) => (
             <BotonNumero key={num} numero={num} />
           ))}
 
-          {/* Fila Media (2, 5, 8...) */}
           {filaMedia.map((num) => (
             <BotonNumero key={num} numero={num} />
           ))}
 
-          {/* Fila Inferior (1, 4, 7...) */}
           {filaInferior.map((num) => (
             <BotonNumero key={num} numero={num} />
           ))}
