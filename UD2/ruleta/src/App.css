@@ -7,22 +7,100 @@
   padding: 20px;
   background: #083f01;
   color: #fff;
+  min-height: 100vh;
 }
 
 .panelInfoJugador {
   margin-bottom: 20px;
+  font-size: 18px;
 }
 
+.panelInfoJugador p {
+  margin: 5px 0;
+}
+
+/* Apuestas Activas */
+.apuestasActivas {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 15px;
+  margin: 20px auto;
+  max-width: 600px;
+  border-radius: 10px;
+}
+
+.apuestasActivas h3 {
+  margin-top: 0;
+  color: #ffd700;
+}
+
+.apuestaItem {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 5px;
+}
+
+.apuestaItem p {
+  margin: 0;
+  font-size: 16px;
+}
+
+/* Resultado */
+.resultadoContainer {
+  background: rgba(255, 215, 0, 0.2);
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 600px;
+  border-radius: 10px;
+  border: 2px solid #ffd700;
+}
+
+.resultadoContainer h1 {
+  margin: 10px 0;
+  font-size: 36px;
+  color: #ffd700;
+}
+
+.mensajeResultado {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+/* Ruleta */
 .ruletaLoader {
   margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.palancaContainer {
+  margin-top: 20px;
 }
 
 .palancaContainer button {
   cursor: pointer;
-  background: none;
-  border: none;
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid #ffd700;
   color: #fff;
-  font-size: 16px;
+  font-size: 18px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: 0.3s;
+}
+
+.palancaContainer button:hover:not(:disabled) {
+  background: rgba(255, 215, 0, 0.2);
+  transform: scale(1.05);
+}
+
+.palancaContainer button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .girando {
@@ -31,110 +109,246 @@
 
 @keyframes girar {
   0% { transform: rotate(0deg); }
-  100% { transform: rotate(3turn); }
+  100% { transform: rotate(1080deg); }
 }
 
-/* Tablero */
+/* ============================================ */
+/* TABLERO DE RULETA - Layout Real de Casino */
+/* ============================================ */
 .tableroContainer {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 30px;
+  padding: 20px;
 }
 
 .tableroRuleta {
   display: grid;
-  grid-template-columns: repeat(13, 50px); /* 12 números + columna 0 */
-  grid-template-rows: repeat(4, 50px); /* 3 filas de números + fila de apuestas */
-  gap: 4px;
+  /* 1 columna para el 0 + 12 números + 1 columna para 2to1 */
+  grid-template-columns: 60px repeat(12, 50px) 60px;
+  gap: 2px;
+  background: #0a5d00;
+  padding: 10px;
+  border-radius: 10px;
+  border: 3px solid #ffd700;
 }
 
-/* Cero */
+/* ============================================ */
+/* CERO - Ocupa las 3 primeras filas */
+/* ============================================ */
 .cero {
-  background-color: green;
+  background: linear-gradient(135deg, #0a8f08, #064d04);
   color: #fff;
   font-weight: bold;
-  grid-row: 1 / 4; /* ocupa las 3 filas verticales */
-  border-radius: 5px;
+  font-size: 24px;
+  grid-column: 1;
+  grid-row: 1 / 4;
+  border-radius: 8px;
   cursor: pointer;
+  border: 2px solid #0a5d00;
+  transition: 0.2s;
 }
 
-/* Números */
+.cero:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(10, 143, 8, 0.8);
+}
+
+/* ============================================ */
+/* NÚMEROS DEL 1-36 */
+/* ============================================ */
 .numero {
+  width: 50px;
+  height: 50px;
   border-radius: 5px;
-  border: 1px solid #333;
+  border: 2px solid #444;
   font-weight: bold;
+  font-size: 18px;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 .numero.rojo {
-  background-color: red;
+  background: linear-gradient(135deg, #d32f2f, #b71c1c);
   color: white;
 }
 
 .numero.negro {
-  background-color: black;
+  background: linear-gradient(135deg, #424242, #212121);
   color: white;
 }
 
 .numero:hover {
-  transform: scale(1.1);
-  transition: 0.1s;
+  transform: scale(1.15);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+  z-index: 10;
 }
 
-/* Botones de apuesta especiales */
-.columna-bet, .docena-bet, .color-bet {
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  color: #fff;
-  height: 40px;
-}
-
+/* ============================================ */
+/* COLUMNAS (2 to 1) - A la derecha de cada fila */
+/* ============================================ */
 .columna-bet {
-  background-color: #555;
+  background: linear-gradient(135deg, #666, #444);
+  color: #ffd700;
+  font-weight: bold;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid #888;
+  grid-column: 14;
+  transition: 0.2s;
 }
 
+.columna-bet:nth-of-type(14) {
+  grid-row: 1;
+}
+
+.columna-bet:nth-of-type(27) {
+  grid-row: 2;
+}
+
+.columna-bet:nth-of-type(40) {
+  grid-row: 3;
+}
+
+.columna-bet:hover {
+  background: linear-gradient(135deg, #888, #666);
+  transform: scale(1.05);
+}
+
+/* ============================================ */
+/* ESPACIO VACÍO - Para alinear filas inferiores */
+/* ============================================ */
+.espacio-vacio {
+  grid-column: 1;
+}
+
+/* ============================================ */
+/* DOCENAS (1st 12, 2nd 12, 3rd 12) */
+/* ============================================ */
 .docena-bet {
-  background-color: #666;
+  background: linear-gradient(135deg, #555, #333);
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid #777;
+  grid-column: span 4;
+  grid-row: 4;
+  padding: 10px;
+  transition: 0.2s;
+}
+
+.docena-bet:hover {
+  background: linear-gradient(135deg, #777, #555);
+  transform: scale(1.02);
+}
+
+/* ============================================ */
+/* APUESTAS SIMPLES (Impar, Rojo, Negro, Par) */
+/* ============================================ */
+.apuesta-simple {
+  background: linear-gradient(135deg, #444, #222);
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid #666;
+  grid-column: span 3;
+  grid-row: 5;
+  padding: 10px;
+  transition: 0.2s;
+}
+
+.apuesta-simple:hover {
+  background: linear-gradient(135deg, #666, #444);
+  transform: scale(1.02);
+}
+
+.color-bet {
+  font-weight: bold;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid #333;
+  grid-column: span 3;
+  grid-row: 5;
+  padding: 10px;
+  transition: 0.2s;
 }
 
 .color-bet.rojo {
-  background-color: red;
+  background: linear-gradient(135deg, #d32f2f, #b71c1c);
+  color: white;
 }
 
 .color-bet.negro {
-  background-color: black;
+  background: linear-gradient(135deg, #424242, #212121);
+  color: white;
 }
 
-/* Modal */
+.color-bet:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* ============================================ */
+/* MODAL */
+/* ============================================ */
 .modalOverlay {
   position: fixed;
   top: 0;
   left: 0;
-  right:0;
-  bottom:0;
-  background: rgba(0,0,0,0.7);
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
 
 .modalContent {
-  background: #111;
-  padding: 20px;
-  border-radius: 10px;
+  background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+  padding: 30px;
+  border-radius: 15px;
   text-align: center;
+  border: 3px solid #ffd700;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+  min-width: 350px;
+}
+
+.modalContent h3 {
+  color: #ffd700;
+  margin-top: 0;
 }
 
 .modalContent button {
   margin: 5px;
-  padding: 5px 15px;
+  padding: 10px 20px;
   cursor: pointer;
+  border-radius: 8px;
+  border: 2px solid #ffd700;
+  background: #333;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.modalContent button:hover {
+  background: #ffd700;
+  color: #000;
+  transform: scale(1.05);
 }
 
 .modalError {
   color: #ff5555;
   margin-top: 10px;
   font-weight: bold;
+  background: rgba(255, 85, 85, 0.2);
+  padding: 8px;
+  border-radius: 5px;
 }
