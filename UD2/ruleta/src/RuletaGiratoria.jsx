@@ -8,18 +8,22 @@ function RuletaGiratoria({ estaGirando, puedeGirar, alGirar }) {
 
   return (
     <div className="ruletaLoader">
+    <div className="ruletaContainer">
       <img
         src={ruletaImg}
         alt="Ruleta"
         className={claseGiro}
-        style={{ width: "400px", height: "auto" }}
-      />
-      <div className="palancaContainer">
-        <button onClick={alGirar} disabled={estaGirando || !puedeGirar}>
-          <img src={imagenPalanca} alt="Palanca" width="120" />
+        style={{ width: "400px", height: "auto" }}/>
+  
+        <button className="palancaContainer" onClick={alGirar} disabled={estaGirando || !puedeGirar}>
+          <img src={imagenPalanca} alt="Palanca" width="100px" />
           {estaGirando ? "Girando..." : "Gira la ruleta"}
         </button>
-      </div>
+     
+        </div>
+     
+     
+      
     </div>
   );
 }

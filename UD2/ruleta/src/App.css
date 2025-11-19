@@ -77,11 +77,20 @@
 
 .palancaContainer {
   margin-top: 20px;
+   cursor: pointer;
+  background: transparent;
+
+  color: #fff;
+  font-size: 18px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  
+  transition: 0.3s;
 }
 
-.palancaContainer button {
+/* .palancaContainer button {
   cursor: pointer;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(235, 31, 31, 0.5);
   border: 2px solid #ffd700;
   color: #fff;
   font-size: 18px;
@@ -91,14 +100,15 @@
   flex-direction: column;
   align-items: center;
   transition: 0.3s;
-}
+} */
 
 .palancaContainer button:hover:not(:disabled) {
   background: rgba(255, 215, 0, 0.2);
   transform: scale(1.05);
+  border: 2px solid #ffd700
 }
 
-.palancaContainer button:disabled {
+.palancaContainer :disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
@@ -126,16 +136,14 @@
   display: grid;
   /* 1 columna para el 0 + 12 números + 1 columna para 2to1 */
   grid-template-columns: 60px repeat(12, 50px) 60px;
-  gap: 2px;
+  gap: 0px;
   background: #0a5d00;
   padding: 10px;
   border-radius: 10px;
   border: 3px solid #ffd700;
 }
 
-/* ============================================ */
-/* CERO - Ocupa las 3 primeras filas */
-/* ============================================ */
+
 .cero {
   background: linear-gradient(135deg, #0a8f08, #064d04);
   color: #fff;
@@ -188,6 +196,8 @@
 /* COLUMNAS (2 to 1) - A la derecha de cada fila */
 /* ============================================ */
 .columna-bet {
+   width: 50px;
+  height: 50px;
   background: linear-gradient(135deg, #666, #444);
   color: #ffd700;
   font-weight: bold;
@@ -237,12 +247,15 @@
   grid-column: span 4;
   grid-row: 4;
   padding: 10px;
-  transition: 0.2s;
+  transition: transform 0.3s ease;
+  transform: translatex(51px);
 }
+
+
 
 .docena-bet:hover {
   background: linear-gradient(135deg, #777, #555);
-  transform: scale(1.02);
+
 }
 
 /* ============================================ */
@@ -259,12 +272,13 @@
   grid-column: span 3;
   grid-row: 5;
   padding: 10px;
-  transition: 0.2s;
+    transition: transform 0.3s ease;
+  transform: translatex(51px);
 }
 
 .apuesta-simple:hover {
   background: linear-gradient(135deg, #666, #444);
-  transform: scale(1.02);
+
 }
 
 .color-bet {
@@ -276,7 +290,8 @@
   grid-column: span 3;
   grid-row: 5;
   padding: 10px;
-  transition: 0.2s;
+    transition: transform 0.3s ease;
+  transform: translatex(51px);
 }
 
 .color-bet.rojo {
@@ -290,7 +305,7 @@
 }
 
 .color-bet:hover {
-  transform: scale(1.02);
+
   box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 
