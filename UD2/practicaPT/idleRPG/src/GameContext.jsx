@@ -17,10 +17,10 @@ const INITIAL_STATE = {
   vidaMaximaMonstruo: 50,
   ataqueMonstruo: 5,
 
-  precioEspada: 50,
-  precioEscudo: 40,
-  precioPocion: 30,
-  precioArmadura: 100,
+  precioEspada: 30,
+  precioEscudo: 20,
+  precioPocion: 25,
+  precioArmadura: 80,
 
   contadorEspadas: 0,
   contadorEscudos: 0,
