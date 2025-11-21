@@ -1,0 +1,122 @@
+body {
+  background: #0b3b17;
+}
+
+.roulette-wrapper {
+  background: #0f5a23;
+  padding: 20px;
+  border-radius: 16px;
+  display: inline-block;
+  margin: 30px auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* GRID PRINCIPAL (usamos d-grid de Bootstrap para display:grid) */
+.roulette-board {
+  grid-template-columns: 60px auto 60px;
+  /* 0 | números | 2 a 1 */
+  grid-template-rows: repeat(5, 60px);
+  /* 3 filas números + docenas + externas */
+}
+
+/* Celda base */
+.cell {
+  border: 1px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.green {
+  background: #2e7d32;
+}
+
+.red {
+  background: #d32f2f;
+}
+
+.black {
+  background: #212121;
+}
+
+.bet-outside {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.cell:hover {
+  outline: 2px solid #ffeb3b;
+  outline-offset: -2px;
+}
+
+/* 0 a la izquierda, ocupando 3 filas */
+.zero {
+  grid-row: 1 / span 3;
+  grid-column: 1;
+  font-size: 20px;
+}
+
+/* Bloque de números 1–36: 3 filas x 12 columnas */
+.numbers-grid {
+  grid-row: 1 / span 3;
+  grid-column: 2;
+  grid-template-columns: repeat(12, 60px);
+  grid-template-rows: repeat(3, 60px);
+}
+
+/* Columna “2 a 1” a la derecha (3 filas) */
+.column-bets {
+  grid-row: 1 / span 3;
+  grid-column: 3;
+  grid-template-rows: repeat(3, 60px);
+}
+
+/* Fila de docenas */
+.docenas-grid {
+  grid-row: 4;
+  grid-column: 1 / span 3;
+  grid-template-columns: 60px repeat(3, minmax(0, 1fr)) 60px;
+  /* vacío | 3 docenas | vacío */
+}
+
+/* Fila de apuestas externas */
+.outside-bets {
+  grid-row: 5;
+  grid-column: 1 / span 3;
+  grid-template-columns: 60px repeat(6, minmax(0, 1fr)) 60px;
+  /* vacío | 6 apuestas | vacío */
+}
+
+.empty {
+  border: none;
+  background: transparent;
+  cursor: default;
+}
+
+.resultado {
+  color: #fff;
+  font-size: 120px;
+}
+
+.dineros {
+  color: #E8A02E;
+  font-size: 60px;
+}
+
+.girando{
+  animation: girar 3s ease-out;
+}
+
+@keyframes girar {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(3turn);
+  }
+}
