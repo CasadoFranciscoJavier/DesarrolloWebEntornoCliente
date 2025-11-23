@@ -140,7 +140,12 @@ export function GameProvider({ children }) {
     }
     // Acción para reiniciar el juego completamente
     else if (action.type == 'REINICIAR_JUEGO') {
-      outputState = INITIAL_STATE
+      // Reiniciamos PERO iniciamos el juego automáticamente
+      outputState = {
+        ...INITIAL_STATE,
+        juegoIniciado: true,
+        juegoPausado: false
+      }
     }
 
     return outputState;
