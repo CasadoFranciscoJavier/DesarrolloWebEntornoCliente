@@ -7,7 +7,6 @@ export default function ListarAnimes() {
     const [animes, setAnimes] = useState([])
     const [paginaActual, setPaginaActual] = useState(1)
 
-    // Hook useEffect para cargar datos al montar el componente
    useEffect(() => {
     getAnimes(paginaActual)
         .then((response) => {
@@ -45,7 +44,7 @@ export default function ListarAnimes() {
             </div>
 
             <div className="row">
-                {/* Renderiza los datos de la API */}
+            
                 {animes.map((anime) => (
                     <AnimeCard key={anime.mal_id} anime = { anime } />
                 ))}
