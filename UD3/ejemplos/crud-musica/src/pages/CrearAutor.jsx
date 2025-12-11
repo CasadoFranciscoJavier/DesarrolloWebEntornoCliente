@@ -2,18 +2,19 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { postautores } from "../services/musicaService.js";
 
-const peliculaVacia = {
-    foto_url: '',
-    title: '',
-    release_year: '',
-    genres: [],
-    synopsis: ''
-}
+// const autorVacio = {
+//     foto_url: '',
+//     nombre: '',
+//     pais: '',
+//     periodo: ''
+// };
+
+const IMAGEN_DEFAULT = 'https://ui-avatars.com/api/?name=Nuevo+Autor&background=random&size=256';
 
 export default function CrearAutor() {
 
     const navigate = useNavigate();
-    const [autor, setAutor] = useState(peliculaVacia);
+    const [autor, setAutor] = useState({});
 
     const PERIODOS = ['Renacimiento', 'Renacimiento tardío', 'Barroco temprano', 'Barroco', 'Clasicismo', 'Romanticismo'];
 
@@ -78,23 +79,25 @@ export default function CrearAutor() {
     //     return autor.synopsis.trim().length >= 10 && autor.synopsis.trim().length <= 500;
     // }
 
-    function handlePeriodoChange(periodo) {
-  setAutor({
-    ...autor,
-    periodo: periodo
-  });
-}
+ 
 
 
     function handleSubmit(form) {
         form.preventDefault();
-        
-            postautores(autor)
-                .then((response) => navigate(`/autores/${response.data.id}`))
-                .catch((error) => console.error(error));
-        
+
+        // Si no hay foto_url, usar la imagen por defecto
+        const autorConImagen = {
+            ...autor,
+            foto_url: autor.foto_url || IMAGEN_DEFAULT
+        };
+
+        postautores(autorConImagen)
+            .then((response) => navigate(`/autores/${response.data.id}`))
+            .catch((error) => console.error(error));
     }
-    const img = autor.foto_url
+
+    const img = autor.foto_url || IMAGEN_DEFAULT;  
+
 
     return (
 
@@ -146,20 +149,21 @@ export default function CrearAutor() {
                             />
                         </div>
 
-                        <div className="mb-3">
+                        <div className="mb-3 ">
                             <label className="form-label"><strong>Periodo: </strong></label>
                             <div className="row">
                                 {PERIODOS.map((periodo) => (
-                                    <div key={periodo} className="col-6 col-md-3">
+                                    <div key={periodo} className=" col-6 col-md-3 gap-5">
                                         <div >
                                             <input
                                                 type="radio"
                                                 name="periodo"
                                                 className="form-check-input"
+                                                value={periodo}
                                                 checked={autor.periodo == periodo}
-                                                onChange={() => handlePeriodoChange(periodo)}
+                                                onChange={handleChange}
                                             />
-                                            <label className="form-check-label">{periodo}</label>
+                                            <label className="form-check-label ">{periodo}</label>
                                         </div>
                                     </div>
                                 ))}

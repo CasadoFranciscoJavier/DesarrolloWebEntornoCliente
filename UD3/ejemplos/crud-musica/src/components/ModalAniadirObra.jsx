@@ -1,16 +1,55 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { postObras } from '../services/musicaService';
 
-const obraVacia = {
-    titulo: '',
-    tipo: '',
-    anio: ''
-}
-
 export default function ModalAniadirObra({ autor }) {
-    const [obra, setObra] = useState(obraVacia);
+
+    const OBRA_VACIA = {
+        titulo: '',
+        tipo: '',
+        anio: '',
+        autor_id: autor.id
+    }
+    const [obra, setObra] = useState(OBRA_VACIA);
 
     const TIPOS = ["Misa", "Motete", "Pasión", "Magnificat", "Oficio de difuntos", "Responsorios", "Anthem", "Lamentaciones", "Madrigal espiritual", "Vísperas", "Colección sacra", "Salmo", "Oratorio", "Gloria", "Stabat Mater", "Requiem", "Himno"];
+
+    const [mensajeTitulo, setMensajeTitulo] = useState('');
+    const [mensajeTipo, setMensajeTipo] = useState('');
+    const [mensajeAnio, setMensajeAnio] = useState('');
+  
+
+    useEffect(() => {
+        setMensajeTitulo(
+            validarTitulo() ? '' : 'El título debe tener una longitud de entre 3 y 50 caracteres'
+        )
+
+        setMensajeTipo(
+            validarTipo() ? '' : 'Debes seleccionar un tipo'
+        )
+
+        setMensajeAnio(
+            validarAnio() ? '' : 'El anio debe ser entre 1000 y 2025'
+        )
+
+      
+    }, [obra]);
+
+    function validarTitulo() {
+    return (obra.titulo.length >= 3 && obra.titulo.length <= 50)
+  }
+
+  function validarTipo() {
+    return obra.tipo !== ''
+
+    // si fuera un checkbox por ejemplo. nos cerciormamos que es un array: tipos []. para el radio seria igual que el que tenemos
+    // return obra.tipo.length > 0  
+  }
+
+  function validarAnio() {
+    return (obra.anio >= 1000 && obra.anio <= 2025)
+  }
+
+
 
     function handleChange(input) {
         const { name, value } = input.target;
@@ -23,18 +62,9 @@ export default function ModalAniadirObra({ autor }) {
     function handleSubmit(form) {
         form.preventDefault();
 
-        const obraData = {
-            titulo: obra.titulo,
-            tipo: obra.tipo,
-            anio: parseInt(obra.anio),
-            autor_id: autor.id
-        };
-
-        postObras(obraData)
+        postObras(obra)
             .then(() => {
-                setObra(obraVacia);
-                alert('Obra añadida correctamente');
-                window.location.reload();
+                window.location.href = `/autores/${autor.id}`;
             })
             .catch((error) => console.error(error));
     }
@@ -46,7 +76,7 @@ export default function ModalAniadirObra({ autor }) {
             <div className="modal-dialog modal-dialog-centered modal-lg">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title" id="modalAniadirObraLabel">Registrar Nueva Obra de {autor.nombre}</h5>
+                        <h5 className="modal-title" id="modalAniadirObraLabel">Registrar Nueva Obra de {autor.titulo}</h5>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
@@ -64,6 +94,7 @@ export default function ModalAniadirObra({ autor }) {
                                             onChange={handleChange}
                                             required
                                         />
+                                        {mensajeTitulo && <p className="text-danger">{mensajeTitulo}</p>}
                                     </div>
 
                                     <div className="mb-3">
@@ -82,6 +113,7 @@ export default function ModalAniadirObra({ autor }) {
                                                 </option>
                                             ))}
                                         </select>
+                                        {mensajeTipo && <p className="text-danger">{mensajeTipo}</p>}
                                     </div>
 
                                     <div className="mb-3">
@@ -94,6 +126,7 @@ export default function ModalAniadirObra({ autor }) {
                                             onChange={handleChange}
                                             required
                                         />
+                                        {mensajeAnio && <p className="text-danger">{mensajeAnio}</p>}
                                     </div>
                                 </form>
                             </div>
@@ -103,7 +136,7 @@ export default function ModalAniadirObra({ autor }) {
                                 {img && (
                                     <img
                                         src={img}
-                                        alt={autor.nombre}
+                                        alt={autor.titulo}
                                         className="img-fluid rounded"
                                         style={{ maxHeight: '300px', objectFit: 'cover' }}
                                     />

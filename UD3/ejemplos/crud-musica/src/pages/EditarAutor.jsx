@@ -3,19 +3,19 @@ import {useParams, useNavigate } from "react-router-dom";
 import { getautoresById, putautores } from "../services/musicaService.js";
 
 
-const autorVacio = {
-    foto_url: '',
-    nombre: '',
-    pais: '',
-    periodo: ''
+// const autorVacio = {
+//     foto_url: '',
+//     nombre: '',
+//     pais: '',
+//     periodo: ''
    
-}
+// }
 
 export default function Editar() {
 
     const navigate = useNavigate();
     const { id } = useParams();
-    const [autor, setAutor] = useState(autorVacio);
+    const [autor, setAutor] = useState({});
 
     const PERIODOS = ['Renacimiento', 'Renacimiento tardío', 'Barroco temprano', 'Barroco', 'Clasicismo', 'Romanticismo'];
 
@@ -65,7 +65,7 @@ export default function Editar() {
 
       
                 <div className="col-lg-8 col-md-7 col-12 ">
-                    <h2 className="mb-4">Registrar Autor</h2>
+                    <h2 className="mb-4">Editar Autor</h2>
                     <form onSubmit={handleSubmit}>
 
                         <div className="mb-3">

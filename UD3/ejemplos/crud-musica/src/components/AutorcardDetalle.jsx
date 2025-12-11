@@ -37,21 +37,24 @@ export default function AutorcardDetalle({ autor }) {
 
                         <div className="mb-3">
                             <strong>Obras:</strong>
-                            <div className="d-flex flex-wrap gap-2 mt-2">
+                            <div className="d-flex flex-wrap gap-2">
                                 {autor.obras && autor.obras.map((obra, index) => (
-                                    <span key={index} className="badge bg-primary">
-                                        {obra.titulo}
+                                    <span key={index} className="badge bg-info d-flex flex-column align-items-start ">
+                                        <h6>{obra.titulo}</h6>
+                                        <p>Tipo: {obra.tipo}</p>
+                                        <small>Año: {obra.anio}</small>
                                     </span>
                                 ))}
                             </div>
 
+                        
                             <button
-                                className="badge bg-dark ms-auto border-0"
+                                className="badge bg-info ms-auto border-0 rounded-pill "
                                 data-bs-toggle="modal"
                                 data-bs-target="#modalAniadirObra"
                                 style={{ cursor: 'pointer' }}
                             >
-                                Añadir nueva obra
+                                ➕
                             </button>
                         </div>
 
@@ -79,7 +82,6 @@ export default function AutorcardDetalle({ autor }) {
                 </div>
             </div>
 
-            {/* Modal para añadir obra */}
             <ModalAniadirObra autor={autor} />
         </div>
     )
